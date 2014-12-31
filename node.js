@@ -11,8 +11,6 @@ echo.on('connection', function (conn) {
 
     refreshContactList();
 
-    console.log('[connections = ' + ']');
-
     conn.on('data', function (message) {
         var request = JSON.parse(message);
 
@@ -34,11 +32,11 @@ echo.on('connection', function (conn) {
                 break;
             default :
             {
-                console.log('code does not resognized')
+                console.log('{server}code does not resognized')
             }
         }
 
-        console.log('message = ' + message);
+        console.log('{server}message = ' + message);
     });
 
     conn.on('close', function () {
@@ -62,15 +60,18 @@ echo.on('connection', function (conn) {
     }
 
     function privateMessage(request) {
-        var connection = clients[request.reciever];
+        for (var user in request.recievers) {
+            var connection = clients[request.recievers[user].code];
 
-        if(connection != null){
-           var responce = new Object();
-            responce.sender = request.sender;
-            responce.message = request.message;
-            connection.write(JSON.stringify(responce));
+            if (connection != null) {
+                var responce = new Object();
+                responce.sender = request.sender;
+                responce.message = request.message;
+                responce.actionCode = 1;
+                connection.write(JSON.stringify(responce));
+            }
+
         }
-
     }
 
     function refreshContactList() {
@@ -90,9 +91,10 @@ echo.on('connection', function (conn) {
                  */
                 for (var innerKey in clients) {
                     if (innerKey != key) {
-                        localClients.push(innerKey);
+                        localClients.push({ code: innerKey});
                     }
                 }
+
                 object.onlineUsers = localClients;
 
                 // current user

@@ -7,11 +7,15 @@ nodeApp.controller('bodyController', function ($scope) {
     $scope.message = 'Message';
     $scope.selectedContact = null;
 
+    $scope.onlineUsers = [];
+    $scope.selected = [];
+
     $scope.sock.onopen = function () {
         var usersRequest = new Object();
         usersRequest.actionCode = 0;
         $scope.send(JSON.stringify(usersRequest));
 
+        $scope.$digest()
         console.log('open');
     };
 
@@ -55,7 +59,7 @@ nodeApp.controller('bodyController', function ($scope) {
         request.actionCode = 1;
         request.message = $scope.message;
         request.sender = $scope.currentClientCode;
-        request.reciever = $scope.selectedContact;
+        request.recievers = $scope.selected;
         $scope.send(JSON.stringify(request));
     }
 
@@ -76,8 +80,20 @@ nodeApp.controller('bodyController', function ($scope) {
       } else{
           $scope.privateMessage();
       }
-
     }
+
+    // toggle selection for a given fruit by name
+    $scope.toggleSelection = function toggleSelection(user) {
+        var idx = $scope.selected.indexOf(user);
+
+        if (idx > -1) {
+            $scope.selected.splice(idx, 1);
+        }
+        else {
+            $scope.selected.push(user);
+        }
+
+    };
 
 });
 

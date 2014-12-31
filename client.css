@@ -22,6 +22,7 @@
 
 #contacts{
     width: 300px;
+    overflow: scroll;
 }
 
 #content{
@@ -34,4 +35,8 @@
     position: inherit;
     width: 100%;
     height: 80%;
+}
+
+#images li {
+    margin-bottom: 10px;
 }
