@@ -1,0 +1,9 @@
+{
+    "name": "nodejs_sockjs_chat",
+    "version": "1.0.0",
+    "dependencies": {
+        "angular": "latest",
+        "jquery": "latest"
+    }
+
+}
