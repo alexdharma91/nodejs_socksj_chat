@@ -6,36 +6,69 @@
     <script src="bower_components\jquery\dist\jquery.js"></script>
     <script src="bower_components\angular\angular.js"></script>
     <script src="client.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
     <meta charset="utf-8">.
 </head>
 <body ng-controller="bodyController">
 
 
-<h3>Your number {{currentClientCode}}</h3>
+<ul id="menu" class="nav nav-pills">
+    <li role="presentation" class="active"><a href="#">Home</a></li>
+    <li role="presentation"><a href="#">Profile</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+</ul>
 
-<div id="mainWin">
 
-    <div id="images">
+<h3 id="clientCode">Your number {{currentClientCode}}</h3>
 
-        <div id="contacts" class="about" >
-            <ul>
-                <li ng-repeat="user in onlineUsers">
+<div id="mainWin" >
+
+    <div id="images" >
+        <div id="contacts" class="about jumbotron">
+            <div class="list-group">
+                <a href="#" class="list-group-item" ng-repeat="user in onlineUsers"><li>
                     <input type="checkbox"
-                     ng-checked="selection.indexOf(user) > -1"
-                     ng-click="toggleSelection(user)"/> {{user.code}} <br/>
-                </li>
-            </ul>
+                           ng-checked="selection.indexOf(user) > -1"
+                           ng-click="toggleSelection(user)"/> {{user.code}} <br/>
+                </li></a>
+            </div>
         </div>
 
-        <div id="content" class="about">
+        <div id="content" class="about jumbotron">
             <textarea name="message" cols="40" rows="3" ng-model="message" ></textarea>
-            <button ng-click="sendClick(1)">Send</button>
-            <button ng-click="sendClick(0)">Send All</button>
+
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" ng-click="sendClick(1)">Send</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" ng-click="sendClick(0)">Send All</button>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
 </div>
+
+
+
+<div>
+
+</div>
+
+
+
 
 <br />
 

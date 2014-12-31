@@ -2,6 +2,7 @@
   width: 700px;
   height: 400px;
   margin-bottom: 50%;
+  margin-left: 35%;
   overflow: hidden;
 }
 
@@ -39,4 +40,18 @@
 
 #images li {
     margin-bottom: 10px;
+}
+
+#clientCode{
+    margin-left: 35%;
+}
+
+#menu{
+    margin-left: 43%;
+}
+
+.sendButton{
+    margin-top: 10px;
+    position: inherit;
+    float: left;
 }
