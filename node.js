@@ -1,13 +1,18 @@
 var http = require('http');
 var sockjs = require('sockjs');
+var persistent = require('./persistent.js');
 
 var clients = new Object();
+
+persistent.runDb();
 
 var echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js' });
 echo.on('connection', function (conn) {
 
     var clientIndex = conn.id;
     clients[clientIndex] = conn;
+
+    persistent.insertOnlineUser(conn.id);
 
     refreshContactList();
 
@@ -69,6 +74,8 @@ echo.on('connection', function (conn) {
                 responce.message = request.message;
                 responce.actionCode = 1;
                 connection.write(JSON.stringify(responce));
+
+                persistent.insertPrivateMessage(request.sender, request.recievers[user].code, request.message);
             }
 
         }
