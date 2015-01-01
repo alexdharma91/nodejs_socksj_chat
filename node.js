@@ -20,11 +20,6 @@ echo.on('connection', function (conn) {
         var request = JSON.parse(message);
 
         switch (request.actionCode) {
-            case 0:
-            {
-                //   getOnlineUsers();
-            }
-                break;
             case 1:
             {
                 privateMessage(request);
