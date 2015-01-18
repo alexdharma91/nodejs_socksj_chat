@@ -17,7 +17,7 @@
 var Sequelize = require('sequelize');
 
 // postgres set up
-var sequelize = new Sequelize('postgres', 'postgres', '123456', {
+/* var sequelize = new Sequelize('postgres', 'postgres', '123456', {
     host: 'localhost',
     port: 5432,
     dialect: 'postgres',
@@ -28,18 +28,19 @@ var sequelize = new Sequelize('postgres', 'postgres', '123456', {
         idle: 10000
     }
 
-});
+}); */
 
 var classMap = new Object();
 
 
 // postgres set up
-/*var sequelize = new Sequelize('test', 'test', '123456', {
+var sequelize = new Sequelize('test', 'test', '123456', {
     host: 'localhost',
     port: 5432,
     dialect: 'sqlite',
-    storage: __dirname + '/database.sqlite'
-});*/
+    storage: __dirname + '/database.sqlite',
+    omitNull: true
+});
 
 var Message = sequelize.define('message', {
     content : Sequelize.STRING
@@ -68,7 +69,7 @@ var Message = sequelize.define('message', {
          return this.reciever;
         }
     }
-})
+});
 
 
 /*for(var i = 0; i <= 6; i++){
@@ -76,14 +77,13 @@ var Message = sequelize.define('message', {
 }*/
 
 
-
+/*
 Message.find(2).then(function (photo) {
    console.log('photo = ' + photo);
 }).catch(function (error) {
         res.send(500, error);
-});
+});*/
 
-var js = mess.toJSON();
 
 
 classMap['message'] = Message;
@@ -111,7 +111,7 @@ var User = sequelize.define('sys_user', {
             return this.mappedClass;
         }
     }
-})
+});
 
 classMap['user'] = User;
 
@@ -126,22 +126,14 @@ for(var i = 0; i <= 15; i++){
 }
 
 
-Message.find({}).then(function(res){console.log(res)})
+//Message.find({}).then(function(res){console.log(res)});
 
 
-
-function createUser(nameParam, surnameParam, age){
-    var user = User.build({name: nameParam, surname : surnameParam, age : age})
-
-    User.sync({ force: true }).then(function () {return User.create(user.dataValues);});
-
-  /*
-    user.setAge(45);
-    user.updateAttributes(user.dataValues)
-    */
-
+exports.createUser = function createUser(nameParam, surnameParam, age){
+    var user = User.build({name: nameParam, surname : surnameParam, age : age});
+    User.sync({ force: false }).then(function () {return User.create(user.dataValues);});
     return user;
-}
+};
 
 function saveEntity(entity){
 
