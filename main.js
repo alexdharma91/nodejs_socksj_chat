@@ -1,76 +1,18 @@
-/*
- var hell = require('./hell');                     var sequelize = new Sequelize('database', 'username', 'password', {
- host: 'localhost',
- dialect: 'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql',
-
- pool: {
- max: 5,
- min: 0,
- idle: 10000
- },
- // SQLite only
- storage: 'path/to/database.sqlite'
- });
- hell.fire();
- */
-
 var Sequelize = require('sequelize');
-
-// postgres set up
-/* var sequelize = new Sequelize('postgres', 'postgres', '123456', {
-    host: 'localhost',
-    port: 5432,
-    dialect: 'postgres',
-
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-
-}); */
+var config = require('./db_config.js');
+var models = require('./model/models.js');
 
 var classMap = new Object();
 
-
-// postgres set up
-var sequelize = new Sequelize('test', 'test', '123456', {
-    host: 'localhost',
-    port: 5432,
-    dialect: 'sqlite',
-    storage: __dirname + '/database.sqlite',
+var sequelize = new Sequelize('test', 'test', config.password, {
+    host: config.host,
+    port: config.port,
+    dialect: config.dialect,
+    storage: __dirname + config.storage,
     omitNull: true
 });
 
-var Message = sequelize.define('message', {
-    content : Sequelize.STRING
-   ,sender : Sequelize.STRING
-   ,reciever : Sequelize.STRING
-   ,type : Sequelize.STRING
-},{
-    paranoid: true,
-    instanceMethods: {
-        setContent: function(content) {
-            this.content = content;
-        },
-        getContent: function() {
-            return this.content;
-        }
-       ,setSender: function(sender) {
-            this.sender = sender;
-        }
-       ,getSender: function() {
-           return this.sender;
-        }
-       ,setReciever: function(reciever) {
-         this.reciever = reciever;
-        }
-       ,getReciever: function() {
-         return this.reciever;
-        }
-    }
-});
-
+var Message = models.getMessageModel();
 
 /*for(var i = 0; i <= 6; i++){
     Message.sync({ force: true }).then(function () {return Message.create({content : 'test', sender : 'sender', reciever : 'bnmbnm', type : 'public'});});
@@ -84,34 +26,9 @@ Message.find(2).then(function (photo) {
         res.send(500, error);
 });*/
 
-
-
 classMap['message'] = Message;
 
-var User = sequelize.define('sys_user', {
-    login : {type : Sequelize.STRING}
-   ,age :{type : Sequelize.INTEGER}
-   ,mappedClass : {type : Sequelize.STRING, defaultValue: 'user'}
-},{
-    paranoid: true,
-    instanceMethods: {
-        setLogin: function(login) {
-          this.login = login;
-        },
-        getLogin: function() {
-          return this.login;
-        },
-        setAge: function(age) {
-            this.age = age;
-        },
-        getAge: function() {
-          return this.age;
-        },
-        getMappedClass : function(){
-            return this.mappedClass;
-        }
-    }
-});
+var User = models.getUserModel();
 
 classMap['user'] = User;
 
