@@ -12,7 +12,7 @@ var sequelize = new Sequelize('test', 'test', config.password, {
     omitNull: true
 });
 
-var Message = models.getMessageModel();
+var Message = models.getMessageModel(sequelize, Sequelize);
 
 /*for(var i = 0; i <= 6; i++){
     Message.sync({ force: true }).then(function () {return Message.create({content : 'test', sender : 'sender', reciever : 'bnmbnm', type : 'public'});});
@@ -28,7 +28,7 @@ Message.find(2).then(function (photo) {
 
 classMap['message'] = Message;
 
-var User = models.getUserModel();
+var User = models.getUserModel(sequelize, Sequelize);
 
 classMap['user'] = User;
 

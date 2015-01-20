@@ -1,7 +1,7 @@
-module.exports.getMessageModel =  function(sequelize, DataTypes) {
+module.exports.getMessageModel =  function(sequelize, Sequelize) {
     return sequelize.define('sys_user', {
-        login : {type : DataTypes.STRING}
-        ,age :{type : DataTypes.INTEGER}
+        login : {type : Sequelize.STRING}
+        ,age :{type : Sequelize.INTEGER}
         ,mappedClass : {type : Sequelize.STRING, defaultValue: 'user'}
     },{
         paranoid: true,
@@ -25,7 +25,7 @@ module.exports.getMessageModel =  function(sequelize, DataTypes) {
     });
 }
 
-module.exports.getUserModel = function(sequelize, DataTypes) {
+module.exports.getUserModel = function(sequelize, Sequelize) {
     return sequelize.define('sys_user', {
         login : {type : Sequelize.STRING}
         ,age :{type : Sequelize.INTEGER}
