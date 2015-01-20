@@ -5,7 +5,6 @@ var persistent = require('./main.js');
 var clients = new Object();
 
 
-
 var echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js' });
 echo.on('connection', function (conn) {
 
@@ -114,3 +113,24 @@ echo.on('connection', function (conn) {
 var server = http.createServer();
 echo.installHandlers(server, {prefix: '/echo'});
 server.listen(9999, '127.0.0.1');
+
+
+
+
+
+
+// front
+var express = require("express");
+var fs = require('fs');
+var app = express();
+
+app.get('/', function(req, res) {
+    fs.readFile(__dirname + '\\client.html', 'utf8', function(err, text){
+        res.send(text);
+    });
+});
+
+
+app.use(express.static(__dirname));
+app.listen(3000);
+
