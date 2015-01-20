@@ -1,0 +1,29 @@
+{
+  "name": "module-name",
+  "version": "10.3.1",
+  "description": "node js chat with express and sockjs",
+  "author": "Your Name <you.name@example.org>",
+  "dependencies": {
+    "sqlite3": "latest",
+    "sequelize": "latest",
+    "fs": "latest",
+    "http": "latest",
+    "sockjs": "latest",
+    "express": "latest"
+  },
+  "analyze": true,
+  "license": "MIT",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexdharma91/nodejs_socksj_chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexdharma91/nodejs_socksj_chat/issues"
+  },
+  "homepage": "https://github.com/alexdharma91/nodejs_socksj_chat"
+}
