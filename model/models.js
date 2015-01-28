@@ -28,6 +28,7 @@ module.exports.getMessageModel =  function(sequelize, Sequelize) {
 module.exports.getUserModel = function(sequelize, Sequelize) {
     return sequelize.define('sys_user', {
         login : {type : Sequelize.STRING}
+        , password : {type : Sequelize.STRING}
         ,age :{type : Sequelize.INTEGER}
         ,mappedClass : {type : Sequelize.STRING, defaultValue: 'user'}
     },{
@@ -38,6 +39,12 @@ module.exports.getUserModel = function(sequelize, Sequelize) {
             },
             getLogin: function() {
                 return this.login;
+            },
+            setPassword : function(password){
+                this.password = password;
+            },
+            getPassword : function(){
+                return this.password;
             },
             setAge: function(age) {
                 this.age = age;
