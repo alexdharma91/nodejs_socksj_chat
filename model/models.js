@@ -58,3 +58,40 @@ module.exports.getUserModel = function(sequelize, Sequelize) {
         }
     });
 }
+
+module.exports.getRelationPageUser = function(sequelize, Sequelize){
+    return sequelize.define('sys_user', {
+         userId : {type : Sequelize.INTEGER}
+        ,connectionId : {type : Sequelize.STRING}
+        ,mappedClass : {type : Sequelize.STRING, defaultValue: 'relationPageUser'}
+    },{
+        paranoid: true,
+        instanceMethods: {
+            setUserId : function(userId){
+               this.userId = userId;
+            },
+             getUser : function(){
+               return this.userId;
+             },
+            setConnectionId : function(connectionId){
+               this.connectionId = connectionId;
+            },
+            getConnectionId : function(){
+               return this.connectionId;
+            },
+            getMappedClass : function(){
+                return this.mappedClass;
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+}
