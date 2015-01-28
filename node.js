@@ -116,12 +116,10 @@ server.listen(9999, '127.0.0.1');
 
 
 
-
-
-
 // front
 var express = require("express");
 var fs = require('fs');
+var path = require('path');
 var app = express();
 
 app.get('/', function(req, res) {
@@ -130,7 +128,8 @@ app.get('/', function(req, res) {
     });
 });
 
+app.use('/components', express.static( __dirname + '/components/'));
+app.use('/components/persist/lib/', express.static( __dirname + '/components/persist/lib/'));
 
-app.use(express.static(__dirname));
 app.listen(3000);
 
