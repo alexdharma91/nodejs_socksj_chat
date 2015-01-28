@@ -10,7 +10,8 @@
     "http": "latest",
     "sockjs": "latest",
     "express": "latest",
-    "path": "latest"
+    "path": "latest",
+    "password-hash" : "latest"
   },
   "analyze": true,
   "license": "MIT",
